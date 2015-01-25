@@ -41,6 +41,7 @@ class Solution {
 public:
     vector<int> twoSum(vector<int> &numbers, int target) {
         map<int, int> hash_map;
+        vector<int> ret;
         for (int i = 0; i < numbers.size(); i++) {
             if (hash_map.find(numbers[i]) != hash_map.end()) {
                 if (2*numbers[i] == target) {
