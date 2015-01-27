@@ -31,3 +31,42 @@ public:
         }
     }
 };
+
+
+// 57ms
+class Solution {
+public:
+    ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
+        ListNode* root = new ListNode(0);
+        ListNode* now = root;
+        bool carry_flag = false;
+        bool l1_end = false;
+        bool l2_end = false;
+        int temp = 0;
+        
+        while(true) {
+            temp = (carry_flag ? 1 : 0) + (l1_end ? 0 : l1->val) + (l2_end ? 0 : l2->val);
+            carry_flag = (temp >= 10);
+            now->val = temp % 10;
+            if (!l1_end) {
+                l1 = l1->next;    
+                l1_end = (l1 == NULL);
+            }
+            if (!l2_end) {
+                l2 = l2->next;
+                l2_end = (l2 == NULL);    
+            }
+            if (l1_end && l2_end) {
+                if (carry_flag) {
+                    ListNode* last_node = new ListNode(1);
+                    now->next = last_node;
+                }
+                return root;
+            }
+            ListNode* new_node = new ListNode(0);
+            now->next = new_node;
+            now = new_node;
+        }
+        return root;
+    }
+};
